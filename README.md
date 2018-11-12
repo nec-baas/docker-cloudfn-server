@@ -1,32 +1,42 @@
-NECモバイルバックエンド基盤 Dockerfile
-====================================
+Cloud Functions Server: Dockerfile
+==================================
 
-NECモバイルバックエンド基盤サーバ Cloud Functions (Cloudfn) サーバマネージャ用のDockerfile
+NECモバイルバックエンド基盤 Cloud Functions (Cloudfn) サーバ用の Dockerfile。
 
-以下イメージを含む。
+以下イメージを含みます。
 
 * necbaas/cloudfn-server
+
+本イメージはサーバマネージャ、Java Logic Server, Node.js Logic Server をすべて含みます。
 
 起動例
 ------
 
-    $ docker pull necbaas/cloudfn-server
-    $ docker run -d -e AMQP_URI=amqp://rabbitmq:rabbitmq@rabbitmq1.example.com:5672 necbaas/cloudfn-server
+### RabbitMQ サーバ起動
 
-なお、動作検証に、RabbitMQ サーバが必要の場合は、Docker Hub のオフィシャルコンテナーを利用してください。
+動作検証用に RabbitMQ サーバをコンテナで起動する手順を示します。
+ここでは、Docker Hub のオフィシャルコンテナを利用しています。
 
-RabbitMQ サーバ コンテナーの起動方法
+    $ docker run -d --hostname baas-rabbitmq --name baas-rabbitmq-server \
+      -e RABBITMQ_DEFAULT_USER=rabbitmq -e RABBITMQ_DEFAULT_PASS=rabbitmq rabbitmq:3-alpine
 
-    $ docker run -d --hostname baas-rabbitmq --name baas-rabbitmq-server -e RABBITMQ_DEFAULT_USER=rabbitmq -e RABBITMQ_DEFAULT_PASS=rabbitmq rabbitmq:3-alpine
-
-cloudfn-server　の環境変数 AMQP_URI にある hostname　を 下記のコマンドで取得した IPAddress に置き換えます。
+RabbitMQ サーバの IP アドレスは以下コマンドで確認してください。
 
     $ docker inspect --format="{{ .NetworkSettings.IPAddress }}" baas-rabbitmq-server
+
+以下、cloudfn-server 起動時の AMQP_URI のホスト名には上記 IP アドレスを指定してください。
+
+### Cloud Functions サーバ起動
+
+AMQP_URI に RabbitMQ サーバの URI を指定して cloudfn-server を起動します。
+
+    $ docker pull necbaas/cloudfn-server
+    $ docker run -d -e AMQP_URI=amqp://rabbitmq:rabbitmq@rabbitmq1.example.com:5672 necbaas/cloudfn-server
 
 環境変数
 --------
 
-Cloudfn サーバ 実行時には以下の環境変数が参照される。
+Cloudfn サーバ 実行時には以下の環境変数が参照されます。
 
 ### Java 関連
 
@@ -48,4 +58,5 @@ Cloudfn サーバ 実行時には以下の環境変数が参照される。
 注意事項
 ---------
 
-本イメージのロジックサーバの実行環境(Nodejs v8/OpenJDK11)になる。
+本イメージのロジックサーバの実行環境は Node.js v8 / OpenJDK 11 となります。
+また、spec 名はそれぞれ "node", "java" となります。
