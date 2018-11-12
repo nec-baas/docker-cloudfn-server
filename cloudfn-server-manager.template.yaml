@@ -1,0 +1,19 @@
+system:
+  noChargeKey: %SYSTEM_NO_CHARGE_KEY%
+  type: direct
+
+amqp:
+  uri: %AMQP_URI%
+
+usercode:
+  host_root_dir: /var/cloudfn/usercode
+
+#fluentd:
+#  address: %LOG_FLUENT_HOST%:%LOG_FLUENT_PORT%
+
+spec:
+  node:
+    cmd: node /opt/cloudfn/node-server/package/bin/server.js
+  java:
+    cmd: java -jar /opt/cloudfn/java-server/cloudfn-java-server.jar
+
