@@ -1,5 +1,5 @@
-NAME_DIRECT = necbaas/cloudfn-server:7.5.0-direct
-NAME_DOCKER = necbaas/cloudfn-server:7.5.0-docker
+NAME_DIRECT = necbaas/cloudfn-server:7.5-direct
+NAME_DOCKER = necbaas/cloudfn-server:7.5-docker
 
 VOLUME_LOG_OPTS = -v $(PWD)/logs:/var/log/cloudfn:rw
 VOLUME_USER_CODE_OPTS = -v $(PWD)/usercode:/var/cloudfn/usercode

@@ -48,9 +48,9 @@ RabbitMQ サーバの IP アドレスは以下コマンドで確認してくだ�
       $ docker pull necbaas/cloudfn-server
       $ docker run -d \
         -e AMQP_URI=amqp://rabbitmq:rabbitmq@rabbitmq1.example.com:5672 \
-        necbaas/cloudfn-server:7.5.0-direct
+        necbaas/cloudfn-server:7.5-direct
 
-#### necbaas/cloudfn-server:[version]-direct の場合
+#### necbaas/cloudfn-server:[version]-docker の場合
  
 * ロジックサーバのイメージを取得します。
    
@@ -69,7 +69,7 @@ RabbitMQ サーバの IP アドレスは以下コマンドで確認してくだ�
             -v /var/cloudfn/usercode:/var/cloudfn/usercode \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -e AMQP_URI=amqp://rabbitmq:rabbitmq@rabbitmq1.example.com:5672 \
-            necbaas/cloudfn-server:7.5.0-docker
+            necbaas/cloudfn-server:7.5-docker
          
 環境変数
 --------
