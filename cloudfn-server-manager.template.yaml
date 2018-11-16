@@ -1,19 +1,26 @@
 system:
   noChargeKey: %SYSTEM_NO_CHARGE_KEY%
-  type: direct
+  type: %SYSTEM_TYPE%
 
 amqp:
   uri: %AMQP_URI%
 
 usercode:
-  host_root_dir: /var/cloudfn/usercode
+  host_root_dir: %USER_CODE_HOST_DIR%
+
+#docker:
+#  uri: unix:///var/run/docker.sock
 
 #fluentd:
 #  address: %LOG_FLUENT_HOST%:%LOG_FLUENT_PORT%
 
 spec:
   node:
-    cmd: node /opt/cloudfn/node-server/package/bin/server.js
+#    repoTag: %NODE_REPO_TAG%
+#    volume: %NODE_HOST_DIR%
+    cmd: node %NODE_CMD_PAH%/bin/server.js
   java:
-    cmd: java -jar /opt/cloudfn/java-server/cloudfn-java-server.jar
+#    repoTag: %JAVA_REPO_TAG%
+#    volume: %JAVA_HOST_DIR%
+    cmd: java -jar %JAVA_CMD_PAH%/cloudfn-java-server.jar
 
