@@ -13,7 +13,11 @@ RUN test "$SYSTEM_TYPE" = "direct" && \
 
 # Install Cloud Functions submodules
 ENV CLOUDFN_VERSION 7.5.0
-ADD files/cloudfn-servers-$CLOUDFN_VERSION/ /dist
+RUN mkdir /dist \
+    && cd /dist \
+    && wget --no-check-certificate https://github.com/nec-baas/cloudfn-server/releases/download/v$CLOUDFN_VERSION/cloudfn-servers-$CLOUDFN_VERSION.tar.gz \
+    && tar xzf cloudfn-servers-$CLOUDFN_VERSION.tar.gz --strip-components=1 \
+    && /bin/rm cloudfn-servers-$CLOUDFN_VERSION.tar.gz
 
 RUN mkdir -p /opt/cloudfn/bin /opt/cloudfn/node-server /opt/cloudfn/java-server
 RUN cp /dist/server-manager/bin/cloudfn-server-manager.jar /opt/cloudfn/bin/

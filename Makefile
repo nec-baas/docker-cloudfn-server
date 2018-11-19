@@ -8,10 +8,10 @@ VOLUME_DOCKER_SOCKET_OPTS = -v /var/run/docker.sock:/var/run/docker.sock
 DIRECT_VOLUME_OPTS = $(VOLUME_LOG_OPTS)
 DOCKER_VOLUME_OPTS = $(VOLUME_LOG_OPTS) $(VOLUME_USER_CODE_OPTS) $(VOLUME_DOCKER_SOCKET_OPTS)
 
-all: download direct docker
+all: direct docker
 
-download:
-	@./download.sh
+#download:
+#	@./download.sh
 
 direct:
 	docker build -t $(NAME_DIRECT) --build-arg SYSTEM_TYPE="direct" .
