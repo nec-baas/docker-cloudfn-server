@@ -14,10 +14,10 @@ download:
 	@./download.sh
 
 direct:
-	docker build -t $(NAME_DIRECT) -f Dockerfile.in . --build-arg SYSTEM_TYPE="direct"
+	docker build -t $(NAME_DIRECT) --build-arg SYSTEM_TYPE="direct" .
 
 docker:
-	docker build -t $(NAME_DOCKER) -f Dockerfile.in . --build-arg SYSTEM_TYPE="docker"
+	docker build -t $(NAME_DOCKER) --build-arg SYSTEM_TYPE="docker" .
 
 clean:
 
