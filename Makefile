@@ -22,30 +22,30 @@ Dockerfile.docker: Dockerfile.in
 	@cat Dockerfile.in | sed "s/%%SYSTEM_TYPE%%/docker/" > $@
 
 direct:
-	docker build -t $(NAME_DIRECT) -f Dockerfile.direct .
+	docker image build -t $(NAME_DIRECT) -f Dockerfile.direct .
 
 docker:
-	docker build -t $(NAME_DOCKER) -f Dockerfile.docker .
+	docker image build -t $(NAME_DOCKER) -f Dockerfile.docker .
 
 clean:
 
 rmi:
-	docker rmi $(NAME_DIRECT) $(NAME_DOCKER)
+	docker image rm $(NAME_DIRECT) $(NAME_DOCKER)
 
 bash-direct:
-	docker run -it --rm $(DIRECT_VOLUME_OPTS) $(NAME_DIRECT) /bin/bash
+	docker container run -it --rm $(DIRECT_VOLUME_OPTS) $(NAME_DIRECT) /bin/bash
 
 bash-docker:
-	docker run -it --rm $(DIRECT_VOLUME_OPTS) $(NAME_DOCKER) /bin/bash
+	docker container run -it --rm $(DIRECT_VOLUME_OPTS) $(NAME_DOCKER) /bin/bash
 
 start-direct:
-	docker run -d $(DIRECT_VOLUME_OPTS) $(NAME_DIRECT)
+	docker container run -d $(DIRECT_VOLUME_OPTS) $(NAME_DIRECT)
 
 start-docker:
-	docker run -d $(DIRECT_VOLUME_OPTS) $(NAME_DOCKER)
+	docker container run -d $(DIRECT_VOLUME_OPTS) $(NAME_DOCKER)
 
 push-direct:
-	docker push $(NAME_DIRECT)
+	docker image push $(NAME_DIRECT)
 
 push-docker:
-	docker push $(NAME_DOCKER)
+	docker image push $(NAME_DOCKER)
