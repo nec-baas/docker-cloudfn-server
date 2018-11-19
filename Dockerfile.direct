@@ -11,8 +11,7 @@ RUN mkdir /dist \
 RUN mkdir -p /opt/cloudfn/bin /opt/cloudfn/node-server /opt/cloudfn/java-server
 RUN cp /dist/server-manager/bin/cloudfn-server-manager.jar /opt/cloudfn/bin/
 
-ARG SYSTEM_TYPE
-ENV SYSTEM_TYPE $SYSTEM_TYPE
+ENV SYSTEM_TYPE direct
 
 RUN test "$SYSTEM_TYPE" = "direct" && \
    ( cp /dist/java/cloudfn-java-server.jar /opt/cloudfn/java-server/ \

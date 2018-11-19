@@ -13,11 +13,19 @@ all: direct docker
 #download:
 #	@./download.sh
 
+update: Dockerfile.direct Dockerfile.docker
+
+Dockerfile.direct: Dockerfile.in
+	@cat Dockerfile.in | sed "s/%%SYSTEM_TYPE%%/direct/" > $@
+
+Dockerfile.docker: Dockerfile.in
+	@cat Dockerfile.in | sed "s/%%SYSTEM_TYPE%%/docker/" > $@
+
 direct:
-	docker build -t $(NAME_DIRECT) --build-arg SYSTEM_TYPE="direct" .
+	docker build -t $(NAME_DIRECT) -f Dockerfile.direct .
 
 docker:
-	docker build -t $(NAME_DOCKER) --build-arg SYSTEM_TYPE="docker" .
+	docker build -t $(NAME_DOCKER) -f Dockerfile.docker .
 
 clean:
 
