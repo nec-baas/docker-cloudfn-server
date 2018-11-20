@@ -1,0 +1,26 @@
+system:
+  type: docker
+  noChargeKey: $SYSTEM_NO_CHARGE_KEY
+
+amqp:
+  uri: $AMQP_URI
+
+usercode:
+  host_root_dir: $USER_CODE_HOST_DIR
+
+docker:
+  uri: unix:///var/run/docker.sock
+
+#fluentd:
+#  address: $LOG_FLUENT_HOST:$LOG_FLUENT_PORT
+
+spec:
+  java:
+    repoTag: $JAVA_REPO_TAG
+    volume: $JAVA_HOST_DIR
+    cmd: java -jar /opt/emitter/cloudfn-java-server.jar
+
+  node:
+    repoTag: $NODE_REPO_TAG
+    volume: $NODE_HOST_DIR
+    cmd: node /opt/emitter/bin/server.js

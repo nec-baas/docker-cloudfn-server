@@ -27,7 +27,8 @@ RUN test "$SYSTEM_TYPE" = "direct" && \
 
 # Add config files
 RUN mkdir /etc/baas /var/cloudfn /var/log/cloudfn
-ADD cloudfn-server-manager.template.yaml /etc/baas/
+ADD cloudfn-server-manager.direct.template.yaml /etc/baas/
+ADD cloudfn-server-manager.docker.template.yaml /etc/baas/
 ADD logback.template.properties /etc/baas/
 
 # Fix permission
