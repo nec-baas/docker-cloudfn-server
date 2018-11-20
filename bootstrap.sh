@@ -89,4 +89,4 @@ else
 fi
 
 # 起動
-java -jar ${JAVA_OPTS} /opt/cloudfn/bin/cloudfn-server-manager.jar /etc/baas/cloudfn-server-manager-config.yaml
+exec java -jar ${JAVA_OPTS} /opt/cloudfn/bin/cloudfn-server-manager.jar /etc/baas/cloudfn-server-manager-config.yaml

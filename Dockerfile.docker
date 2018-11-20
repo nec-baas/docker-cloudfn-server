@@ -40,5 +40,5 @@ RUN chmod +x /bootstrap.sh
 # Volume options
 VOLUME ["/var/log/cloudfn"]
 
-CMD /bootstrap.sh
+CMD ["/bootstrap.sh"]
 
