@@ -18,7 +18,7 @@ RUN test "$SYSTEM_TYPE" = "direct" && \
      && tar xvzf /dist/node/cloudfn-node-server-*.tgz -C /opt/cloudfn/node-server/ ) || : 
 
 # Install Nodejs
-ENV NODE_VERSION 8.12.0
+ENV NODE_VERSION 8.14.0
 RUN test "$SYSTEM_TYPE" = "direct" && \
    ( curl -SLO http://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz \
      && tar zxf node-v$NODE_VERSION-linux-x64.tar.gz -C /opt \
