@@ -26,10 +26,10 @@ RUN test "$SYSTEM_TYPE" = "direct" && \
      && /bin/rm node-*.tar.gz ) || :
 
 # Add config files
-RUN mkdir /etc/baas /var/cloudfn /var/log/cloudfn
-ADD cloudfn-server-manager.direct.template.yaml /etc/baas/
-ADD cloudfn-server-manager.docker.template.yaml /etc/baas/
-ADD logback.template.properties /etc/baas/
+RUN mkdir -p /etc/baas/cloudfn /var/cloudfn /var/log/cloudfn
+ADD server-manager.direct.template.yaml /etc/baas/cloudfn/
+ADD server-manager.docker.template.yaml /etc/baas/cloudfn/
+ADD logback.template.properties /etc/baas/cloudfn/
 
 # Fix permission
 RUN chmod -R ugo+rwx /etc/baas /opt/cloudfn /var/cloudfn /var/log/cloudfn /tmp

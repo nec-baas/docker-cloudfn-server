@@ -20,15 +20,15 @@ export LOG_FLUENT_PORT=${LOG_FLUENT_PORT:-24224}
 export JAVA_OPTS=${JAVA_OPTS:-}
 
 # server manager 設定ファイル生成
-cat /etc/baas/cloudfn-server-manager.$SYSTEM_TYPE.template.yaml | envsubst > /tmp/csm.yaml
+cat /etc/baas/cloudfn/server-manager.$SYSTEM_TYPE.template.yaml | envsubst > /tmp/csm.yaml
 
 if [ ! -n "$LOG_FLUENT_HOST" ]; then
-    cp /tmp/csm.yaml /etc/baas/cloudfn-server-manager-config.yaml
+    cp /tmp/csm.yaml /etc/baas/cloudfn/server-manager-config.yaml
 else
     cat /tmp/csm.yaml \
         | sed "s/#fluentd:/fluentd:/" \
         | sed "s/#  address:/  address:/" \
-        > /etc/baas/cloudfn-server-manager-config.yaml
+        > /etc/baas/cloudfn/server-manager-config.yaml
 fi
 
 # logback 設定ファイル生成
@@ -37,7 +37,7 @@ if [ ! -n "$LOG_FLUENT_HOST" ]; then
 else
     export LOG_TYPES=STDOUT,FILE,FLUENT
 fi
-cat /etc/baas/logback.template.properties | envsubst > /etc/baas/cloudfn-server-manager-logback.properties
+cat /etc/baas/cloudfn/logback.template.properties | envsubst > /etc/baas/cloudfn/server-manager-logback.properties
 
 # 起動
-exec java -jar ${JAVA_OPTS} /opt/cloudfn/bin/cloudfn-server-manager.jar /etc/baas/cloudfn-server-manager-config.yaml
+exec java -jar ${JAVA_OPTS} /opt/cloudfn/bin/cloudfn-server-manager.jar /etc/baas/cloudfn/server-manager-config.yaml
