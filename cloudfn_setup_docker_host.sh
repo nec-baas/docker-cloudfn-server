@@ -8,7 +8,7 @@ mkNewDir() {
 }
 
 # Define vars
-CLOUDFN_VERSION=7.5.0
+CLOUDFN_VERSION=7.5.1
 dist=files/cloudfn-servers-$CLOUDFN_VERSION
 USER_CODE_DIR=${USER_CODE_DIR:-/var/cloudfn/usercode}
 NODE_LOGIC_SERVER_DIR=${NODE_LOGIC_SERVER_DIR:-/opt/cloudfn/node-server}
