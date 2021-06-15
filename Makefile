@@ -8,6 +8,8 @@ VOLUME_DOCKER_SOCKET_OPTS = -v /var/run/docker.sock:/var/run/docker.sock
 DIRECT_VOLUME_OPTS = $(VOLUME_LOG_OPTS)
 DOCKER_VOLUME_OPTS = $(VOLUME_LOG_OPTS) $(VOLUME_USER_CODE_OPTS) $(VOLUME_DOCKER_SOCKET_OPTS)
 
+PROXY = --build-arg http_proxy=$(http_proxy) --build-arg https_proxy=$(http_proxy)
+
 all: direct docker
 
 #download:
@@ -22,10 +24,10 @@ Dockerfile.docker: Dockerfile.in
 	@cat Dockerfile.in | sed "s/%%SYSTEM_TYPE%%/docker/" > $@
 
 direct:
-	docker image build -t $(NAME_DIRECT) -f Dockerfile.direct .
+	docker image build $(PROXY) -t $(NAME_DIRECT) -f Dockerfile.direct .
 
 docker:
-	docker image build -t $(NAME_DOCKER) -f Dockerfile.docker .
+	docker image build $(PROXY) -t $(NAME_DOCKER) -f Dockerfile.docker .
 
 clean:
 
